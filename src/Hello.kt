@@ -1,5 +1,6 @@
 import javax.rmi.CORBA.Util
 import kotlin.comparisons.naturalOrder
+import extension.testExtensionOutSide
 
 /**
  * Created by lihong on 2017/3/17.
@@ -73,12 +74,21 @@ class Student(var name: String, age: Int, college: String?) : Person(age) {
         val collegeCopy: String? = college
     }
 
+    var prop: String? = null
+        set(value) {
+            field = value
+        }
+
     //age未申明，只能作为声明属性和初始化模块使用
     var ageCopy = age
 
     //name已申明可作为全局变量使用
     fun outStr() {
         println("method outStr:$name")
+    }
+
+    companion object {
+        var NAME = "companion test"
     }
 }
 
@@ -94,6 +104,9 @@ fun testSudent() {
     println("method testStudent:${stu.name}")
     println("method testStudent:${stu.age}")
     stu.personFun()
+    stu.testExtensionOutSide("outside")
+    stu.testExtenSionInside("inside")
+    println(Student.NAME)
 }
 
 var myStr: String? = "hi";
@@ -103,8 +116,12 @@ fun nullTest(str: String?) {
     } else {
         println(str.length)
     }
-
 }
 
+//只读列表，即使声明为var
+val list = listOf<String>("a", "b")
 
+fun Student.testExtenSionInside(str: String) {
+    println("extension test inside:$str")
+}
 
