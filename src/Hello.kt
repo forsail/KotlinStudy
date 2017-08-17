@@ -15,6 +15,8 @@ fun main(args: Array<String>) {
     testWhen(s);
     testSudent()
     nullTest(myStr)
+    testIn(1)
+    println(testNull(null))
 }
 
 fun add(a: Int, b: Int): Int {
@@ -43,6 +45,9 @@ fun testWhen(n: Any) {
         }
         is Int -> {
             println("int");
+        }
+        "hello" -> {
+            println("this is hello")
         }
         else -> {
             println("other");
@@ -85,11 +90,16 @@ class Student(var name: String, age: Int, college: String?) : Person(age) {
     //name已申明可作为全局变量使用
     fun outStr() {
         println("method outStr:$name")
+//        println("method outStr:$collage") error
     }
 
     companion object {
         var NAME = "companion test"
     }
+}
+
+fun print() {
+    print("my test")
 }
 
 open class Person(val age: Int) {
@@ -119,9 +129,33 @@ fun nullTest(str: String?) {
 }
 
 //只读列表，即使声明为var
-val list = listOf<String>("a", "b")
+private val list = listOf<String>("a", "b")
 
 fun Student.testExtenSionInside(str: String) {
     println("extension test inside:$str")
 }
 
+fun testIn(a: Int?) {
+    if (a in 1..10) {
+        println("ok")
+    } else {
+        println("no")
+    }
+}
+
+fun testNull(a: String?): Int {
+    return a?.length ?: 0
+}
+
+fun <T, R> List<T>.map(transform: (T) -> (R)): List<R> {
+    val result = arrayListOf<R>()
+    for (item in this) {
+        result.add(transform(item))
+    }
+    return result
+}
+
+val <T> List<T>.lastIndex: Int
+    get() {
+        return size - 1
+    }
