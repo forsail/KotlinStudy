@@ -13,7 +13,6 @@ fun main(args: Array<String>) {
 //val p: String by lazy {
 //    "test"
 //}
-
 //class Test {
 //    lateinit var late: String
 //}
