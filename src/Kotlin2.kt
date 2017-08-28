@@ -1,4 +1,5 @@
 import extension.testExtensionOutSide
+import kotlin.concurrent.thread
 
 /**
  * Created by Administrator on 2017/8/18.
@@ -17,10 +18,31 @@ fun main(args: Array<String>) {
     println(intA?.unaryPlus())
     println(intA == intB)
 
+    var aList: List<String> = listOf("a", "b", "c")
+    var bList = aList.map { x -> x + "s" }
+    var cList = aList.map { it + "s" }
+    for (item in bList) {
+        println(item)
+    }
 
     println(+people)
 
+    try {
+        test()
+    } catch (e: Exception) {
+        println("excption")
+    }
 
+}
+
+fun test() {
+    thread {
+        try {
+            throw ArithmeticException("error")
+        } catch (e: Exception) {
+
+        }
+    }
 }
 
 fun <T> singletonList(item: T): List<T> = listOf(item)
