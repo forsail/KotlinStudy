@@ -27,11 +27,14 @@ fun main(args: Array<String>) {
 
     println(+people)
 
-    try {
-        test()
-    } catch (e: Exception) {
-        println("excption")
-    }
+//    try {
+//        test()
+//    } catch (e: Exception) {
+//        println("excption")
+//    }
+
+    var nullTest: String? = null
+    println("null string test " + nullTest?.length)
 
 }
 
